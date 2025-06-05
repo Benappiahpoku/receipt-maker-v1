@@ -1,6 +1,6 @@
 # Version Control Tags
 
-git tag -a stratonea-frontend-starter-v1.0 -m "Stable version 1.0"
+git tag -a receipt-maker-v1.0 -m "Stable version 1.0"
 
 ## Check Tags
 
