@@ -1,3 +1,10 @@
+<!--
+  File: src/views/NewReceiptView.vue
+  Purpose: Main view for creating and previewing receipts (Stratonea Ghana mobile-first, offline-ready).
+  - Handles company/customer info, preview, PDF export, WhatsApp sharing.
+  - All code is modular, type-safe, and well-commented for junior developer learning.
+-->
+
 <template>
     <div class="min-h-screen bg-gray-50">
         <!-- Header -->
@@ -12,43 +19,57 @@
             <div class="space-y-6">
                 <!-- Receipt Form -->
                 <form @submit.prevent="handleGenerate" class="bg-white rounded-lg shadow p-6">
-                    <!-- Business Information -->
+                    <!-- Company Information -->
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Business Name</label>
-                            <input v-model="form.businessName" type="text"
+                            <label class="block text-sm font-medium text-gray-700">Company Name</label>
+                            <input v-model="form.companyName" type="text"
                                 class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                 required />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Contact Number</label>
-                            <input v-model="form.contactNumber" type="tel" placeholder="e.g., 024 XXX XXXX"
+                            <label class="block text-sm font-medium text-gray-700">Company Phone</label>
+                            <input v-model="form.phoneNumber" type="tel" placeholder="e.g., 024 XXX XXXX"
                                 class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                 required />
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">TIN (optional)</label>
-                            <input v-model="form.tin" type="text"
-                                class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Upload Logo</label>
-                            <input type="file" accept="image/*" @change="handleLogoUpload"
-                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
-                        </div>
+                        <!-- Logo Upload -->
+                        <LogoUpload v-model:logo="form.companyLogo" />
                     </div>
+                    <div class="space-y-4 pt-6 border-t mt-6"></div>
 
-                    <!-- Client Information -->
+                    <!-- ===== [New Feature] START ===== -->
+                    <!-- Save/Load/Clear Defaults Buttons and Feedback -->
+                    <div class="flex gap-2 mt-2">
+                        <button type="button" class="text-blue-600 hover:text-blue-800" @click="loadDefaults">
+                            📥&nbsp;Load Info
+                        </button>
+                        <button type="button" class="text-green-600 hover:text-green-800" @click="saveDefaults">
+                            💾&nbsp;Save Info
+                        </button>
+                        <button type="button" class="text-red-600 hover:text-red-800" @click="clearDefaults">
+                            🧹&nbsp;Clear Info
+                        </button>
+                    </div>
+                    <p v-if="defaultSavedMessage" class="text-green-600 text-sm mt-2">
+                        {{ defaultSavedMessage }}
+                    </p>
+                    <p v-if="defaultErrorMessage" class="text-red-600 text-sm mt-2">
+                        {{ defaultErrorMessage }}
+                    </p>
+                    <!-- ===== [New Feature] END ===== -->
+
+                    <!-- Customer Information -->
                     <div class="space-y-4 pt-6 border-t mt-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Client Name</label>
-                            <input v-model="form.clientName" type="text"
+                            <label class="block text-sm font-medium text-gray-700">Customer Name</label>
+                            <input v-model="form.customerName" type="text"
                                 class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                 required />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Client Contact</label>
-                            <input v-model="form.clientContact" type="tel"
+                            <label class="block text-sm font-medium text-gray-700">Customer Phone</label>
+                            <input v-model="form.customerphone" type="tel"
                                 class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                 required />
                         </div>
@@ -68,7 +89,6 @@
                                 Regenerate
                             </button>
                         </div>
-
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Date</label>
@@ -83,11 +103,10 @@
                                     <option value="Cash">Cash</option>
                                     <option value="Mobile Money">Mobile Money</option>
                                     <option value="Bank Transfer">Bank Transfer</option>
-                                    <option value="Card">Card</option>
+                                    <option value="Card">Debit Card</option>
                                 </select>
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Amount (GHS)</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
@@ -99,7 +118,6 @@
                                     required />
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Description</label>
                             <textarea v-model="form.description" rows="2"
@@ -110,27 +128,46 @@
                 </form>
 
                 <!-- Live Preview -->
+                <header class="bg-primary shadow-sm">
+                    <div class="max-w-xl mx-auto px-4 py-4">
+                        <h1 class="text-2xl font-bold text-center text-white"> Preview Receipt</h1>
+                    </div>
+                </header>
                 <div class="space-y-4">
-                    <h2 class="text-lg font-medium text-gray-900">🔽 Live Preview 🔽</h2>
-                    <ReceiptPreview v-bind="form" />
+                    <div class="space-y-4">
+                        <ReceiptPreview :company-name="form.companyName" :company-logo="form.companyLogo"
+                            :phone-number="form.phoneNumber" :customer-name="form.customerName"
+                            :customer-phone="form.customerphone" :receipt-number="form.receiptNumber" :date="form.date"
+                            :amount="form.amount" :payment-method="form.paymentMethod"
+                            :description="form.description" />
+                    </div>
                 </div>
+                <AppSwitcher type="receipt" />
             </div>
         </div>
+        <!-- ===== [New Feature] START ===== -->
+        <!-- ActionHub for PDF and WhatsApp sharing, now using receipt data -->
+        <ActionHub :receipt="form" @download-pdf="handleDownloadPDF" @share-whatsapp="handleShareWhatsApp" />
+        <!-- ===== [New Feature] END ===== -->
     </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import localforage from 'localforage'
 import ReceiptPreview from './ReceiptPreview.vue'
+import ActionHub from '../components/layout/ActionHub.vue'
+import AppSwitcher from '../components/layout/AppSwitcher.vue'
+import LogoUpload from '@/components/base/LogoUpload.vue'
+import html2pdf from 'html2pdf.js'
 
 // ===== Types & Interfaces =====
 interface ReceiptForm {
-    businessName: string
-    contactNumber: string
-    tin: string
-    businessLogo: string
-    clientName: string
-    clientContact: string
+    companyName: string
+    companyLogo: string | null
+    phoneNumber: string
+    customerName: string
+    customerphone: string
     receiptNumber: string
     date: string
     amount: number | null
@@ -140,41 +177,206 @@ interface ReceiptForm {
 
 // ===== Main Logic =====
 const form = reactive<ReceiptForm>({
-    businessName: '',
-    contactNumber: '',
-    tin: '',
-    businessLogo: '',
-    clientName: '',
-    clientContact: '',
-    receiptNumber: generateReceiptNumber(),
+    companyName: '',
+    companyLogo: null,
+    phoneNumber: '',
+    customerName: '',
+    customerphone: '',
+    receiptNumber: '',
     date: new Date().toISOString().slice(0, 10),
     amount: null,
     paymentMethod: 'Cash',
     description: ''
 })
 
+// Set the initial receipt number on mount
+
+onMounted(async () => {
+    form.receiptNumber = await generateReceiptNumber()
+})
+
+
 // ===== Helper Functions =====
-function generateReceiptNumber(): string {
-    return `${new Date().getFullYear()}${String(Math.floor(Math.random() * 10000)).padStart(4, '0')}`
-}
+/**
+ * Generates the next consecutive receipt number in the format YYYY-XXXX.
+ * - YYYY: Current year (e.g., 2025)
+ * - XXXX: 4-digit number, starts at 0001 and increases by 1 each time
+ * - Persists the last number for each year using localForage (offline-ready)
+ * - Ghana-optimized: works offline, always unique per year, easy to read on mobile
+ *
+ * @returns {Promise<string>} The next available receipt number (e.g., "2025-0001")
+ */
+async function generateReceiptNumber(): Promise<string> {
+    // 1. Get the current year as a string (e.g., "2025")
+    const year = new Date().getFullYear().toString()
+    // 2. Use a unique key per year for localForage storage
+    const storageKey = `receiptNumber-${year}`
 
-function regenerateReceiptNumber() {
-    form.receiptNumber = generateReceiptNumber()
-}
-
-function handleLogoUpload(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0]
-    if (file) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-            form.businessLogo = e.target?.result as string
-        }
-        reader.readAsDataURL(file)
+    // 3. Get the last used number from localForage, or start at 0 if not found
+    let lastNumber = await localforage.getItem<number>(storageKey)
+    if (typeof lastNumber !== 'number' || isNaN(lastNumber)) {
+        lastNumber = 0
     }
+
+    // 4. Increment to get the next number
+    const nextNumber = lastNumber + 1
+
+    // 5. Save the new last number back to localForage for persistence
+    await localforage.setItem(storageKey, nextNumber)
+
+    // 6. Pad the number to 4 digits (e.g., 1 -> "0001")
+    const paddedNumber = String(nextNumber).padStart(4, '0')
+
+    // 7. Return the formatted receipt number (e.g., "2025-0001")
+    return `${year}-${paddedNumber}`
 }
 
+/**
+ * Regenerates the receipt number for the form.
+ */
+async function regenerateReceiptNumber() {
+    form.receiptNumber = await generateReceiptNumber()
+}
+/**
+ * Placeholder for PDF generation logic.
+ * Uses html2pdf.js to generate and download a PDF of the receipt preview.
+ */
 function handleGenerate() {
     // Implement PDF generation
     console.log('Generating PDF...')
 }
+
+/**
+ * Handles PDF download event from ActionHub.
+ * Uses html2pdf.js to generate and download a PDF of the receipt preview.
+ * Ghana-ready: simple, mobile-first, and works offline.
+ */
+function handleDownloadPDF() {
+    // 1. Find the preview DOM node
+    const previewEl = document.getElementById('receipt-preview-pdf')
+    if (!previewEl) {
+        alert('Could not find receipt preview to export. Please try again.')
+        return
+    }
+
+    // 2. Configure html2pdf options for Ghana mobile users
+    const fileName = `Receipt-${form.receiptNumber}${form.customerName ? '--' + form.customerName.trim() : ''}.pdf`
+
+    const opt = {
+        margin: [0.5, 0.8, 0.5, 0.8], // [top, right, bottom, left] margins in inches
+        filename: fileName,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            letterRendering: true // Better text rendering
+        },
+        jsPDF: {
+            unit: 'in',
+            format: 'a4',
+            orientation: 'portrait',
+            putOnlyUsedFonts: true,
+            floatPrecision: 16 // Better text positioning
+        },
+    }
+
+    // 3. Generate and save PDF
+    html2pdf()
+        .set(opt)
+        .from(previewEl)
+        .save()
+        .catch(() => {
+            alert('Could not generate PDF. Please try again or check your internet connection.')
+        })
+}
+
+/**
+ * Handles WhatsApp share event from ActionHub.
+ * Generates a WhatsApp message link with receipt summary and opens it.
+ * Ghana-ready: uses simple text, no attachments (for bandwidth).
+ */
+function handleShareWhatsApp() {
+    // 1. Build receipt summary message
+    const lines = [
+        `🧾 *RECEIPT*`,
+        `━━━━━━━━━━━━━━`,
+        `*From:* ${form.companyName || 'My Company'}`,
+        form.phoneNumber ? `📞 ${form.phoneNumber}` : '',
+        ``,
+        `📅 *Date:* ${form.date}`,
+        form.receiptNumber ? `🔢 *Receipt #:* ${form.receiptNumber}` : '',
+        ``,
+        `👤 *To:* ${form.customerName || 'Customer'}`,
+        form.customerphone ? `📱 ${form.customerphone}` : '',
+        ``,
+        `💰 *Amount:* ₵${form.amount?.toLocaleString('en-GH', { minimumFractionDigits: 2 }) || '0.00'}`,
+        `💳 *Payment Method:* ${form.paymentMethod}`,
+        ``,
+        `📝 *Description:* ${form.description || 'Payment for services'}`,
+        ``,
+        `Generated with Stratonea Receipt Maker`
+    ].filter(Boolean) // Remove empty lines
+
+    const message = lines.join('\n')
+
+    // 2. Format WhatsApp link
+    const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`
+
+    // 3. Open WhatsApp
+    window.open(waUrl, '_blank')
+}
+
+// ===== [Save Defaults Feature] START =====
+// Feedback state for Save/Load/Clear Defaults
+const defaultSavedMessage = ref<string | null>(null)
+const defaultErrorMessage = ref<string | null>(null)
+
+/**
+ * Saves current company info as defaults in localforage.
+ * Only saves companyName and phoneNumber.
+ * Shows a success or error message.
+ */
+async function saveDefaults() {
+    if (!form.companyName || !form.phoneNumber) {
+        defaultErrorMessage.value = 'Please fill in company name and phone before saving.'
+        defaultSavedMessage.value = null
+        return
+    }
+    await localforage.setItem('defaultSettings', {
+        companyName: form.companyName,
+        phoneNumber: form.phoneNumber
+    })
+    defaultSavedMessage.value = 'Defaults saved!'
+    defaultErrorMessage.value = null
+}
+
+/**
+ * Loads saved defaults from localforage and pre-fills company info fields.
+ * Does not trigger form submission or overwrite other fields.
+ */
+async function loadDefaults() {
+    const defaults = await localforage.getItem<{ companyName: string; phoneNumber: string }>(
+        'defaultSettings'
+    )
+    if (defaults) {
+        form.companyName = defaults.companyName
+        form.phoneNumber = defaults.phoneNumber
+        defaultSavedMessage.value = 'Defaults loaded.'
+        defaultErrorMessage.value = null
+    } else {
+        defaultErrorMessage.value = 'No defaults found.'
+        defaultSavedMessage.value = null
+    }
+}
+
+/**
+ * Clears saved defaults from localforage.
+ * Shows a confirmation message.
+ */
+async function clearDefaults() {
+    await localforage.removeItem('defaultSettings')
+    defaultSavedMessage.value = 'Defaults cleared.'
+    defaultErrorMessage.value = null
+}
+// ===== [Save Defaults Feature] END =====
 </script>

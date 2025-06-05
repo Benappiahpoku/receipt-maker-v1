@@ -1,33 +1,93 @@
 <template>
-    <!-- Live Preview Section -->
-    <div class="bg-white rounded-lg shadow-sm p-6 space-y-6">
-        <div class="text-center space-y-4 border-b pb-4">
-            <!-- Logo placeholder -->
-            <div v-if="businessLogo" class="flex justify-center">
-                <img :src="businessLogo" alt="Business Logo" class="h-16 w-auto" />
+    <!-- ===== [Root Container] ===== -->
+    <!-- Added id for PDF export compatibility -->
+    <div id="receipt-preview-pdf" class="bg-white rounded-lg shadow-lg p-8 space-y-8 max-w-md mx-auto">
+        <!-- ===== [Header Section] ===== -->
+        <div class="text-center space-y-4">
+            <!-- ===== [Company Logo] ===== -->
+            <!-- Show the company logo if provided -->
+            <div v-if="companyLogo" class="flex justify-center mb-6">
+                <!-- 
+                  The logo is shown as an <img> tag.
+                  - companyLogo should be a base64 string or image URL.
+                  - If not showing, check that form.companyLogo is set and valid.
+                -->
+                <img :src="companyLogo" alt="Company Logo" class="h-20 w-auto object-contain rounded-lg shadow-sm"
+                    style="max-height: 80px; max-width: 100%;" />
             </div>
-            <h3 class="font-bold text-xl">{{ businessName || 'Your Company Name' }}</h3>
-            <p class="text-gray-600">Tel: {{ contactNumber || '024 XXX XXXX' }}</p>
-            <p v-if="tin" class="text-gray-600">TIN: {{ tin }}</p>
+            <div class="space-y-2 pb-6 border-b border-gray-200">
+                <h3 class="text-2xl font-bold text-gray-800">{{ companyName || 'Your Company Name' }}</h3>
+                <p class="text-gray-600 flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path
+                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                    {{ phoneNumber || '024 XXX XXXX' }}
+                </p>
+            </div>
         </div>
 
-        <!-- Receipt Details -->
-        <div class="space-y-3">
-            <p><span class="font-medium">Receipt No:</span> REC-{{ receiptNumber }}</p>
-            <p><span class="font-medium">Date:</span> {{ formattedDate }}</p>
-            <p><span class="font-medium">Received from:</span> {{ clientName || 'Client Name' }}</p>
-            <p><span class="font-medium">Contact:</span> {{ clientContact }}</p>
-            <p class="text-xl font-bold">
-                <span class="font-medium text-base">Amount:</span>
-                GHS {{ formattedAmount }}
-            </p>
-            <p><span class="font-medium">Payment Method:</span> {{ paymentMethod || 'Cash' }}</p>
-            <p class="text-gray-700"><span class="font-medium">Description:</span> {{ description || 'Payment for services' }}</p>
+        <!-- Receipt Details with modern layout -->
+        <div class="space-y-6">
+            <!-- Receipt Number and Date in a grid -->
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div class="bg-gray-50 p-3 rounded-lg">
+                    <p class="text-gray-500 mb-1">Receipt No.</p>
+                    <p class="font-semibold text-gray-800">REC-{{ receiptNumber }}</p>
+                </div>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                    <p class="text-gray-500 mb-1">Date</p>
+                    <p class="font-semibold text-gray-800">{{ formattedDate }}</p>
+                </div>
+            </div>
+
+            <!-- customer Information -->
+            <div class="bg-gray-50 p-4 rounded-lg space-y-3">
+                <p class="text-gray-500">Received from</p>
+                <div class="space-y-2">
+                    <p class="font-semibold text-gray-800 text-lg">{{ customerName || 'Customer Name' }}</p>
+                    <p class="text-gray-600 text-sm">{{ customerphone || 'Phone Number' }}</p>
+                </div>
+            </div>
+
+            <!-- Payment Details -->
+            <div class="space-y-4">
+                <!-- Amount with emphasis -->
+                <div class="bg-primary-50 p-4 rounded-lg text-center">
+                    <p class="text-primary-600 text-sm mb-1">Amount Paid</p>
+                    <p class="text-3xl font-bold text-primary-700">
+                        GHS {{ formatCurrency(amount ?? 0 ) }}
+                    </p>
+                </div>
+
+                <!-- Payment Method and Description -->
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-gray-500 mb-1">Payment Method</p>
+                        <p class="font-semibold text-gray-800">{{ paymentMethod || 'Cash' }}</p>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-gray-500 mb-1">Date Issued</p>
+                        <p class="font-semibold text-gray-800">{{ formattedDate }}</p>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <p class="text-gray-500 mb-2">Description</p>
+                    <p class="text-gray-800">{{ description || 'Payment for services' }}</p>
+                </div>
+            </div>
         </div>
 
-        <!-- Footer -->
-        <div class="text-center text-gray-600 text-sm pt-4 border-t">
-            <p>Thank you for your business!</p>
+        <!-- Enhanced Footer -->
+        <div class="text-center space-y-4 pt-6 border-t border-gray-200">
+            <p class="text-gray-600 font-medium">We hope to server you again soon. Thank you!</p>
+            <div class="flex justify-center gap-2 text-xs text-gray-500">
+                <span>{{ formattedDate }}</span>
+                <span>•</span>
+                <span>Receipt ID: REC-{{ receiptNumber }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -35,14 +95,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-// Define props for receipt data
+// ===== Types & Interfaces =====
 interface Props {
-    businessName?: string
-    contactNumber?: string
-    tin?: string
-    businessLogo?: string
-    clientName?: string
-    clientContact?: string
+    companyName?: string
+    companyLogo?: string | null  // Updated to allow null
+    phoneNumber?: string
+
+    customerName?: string
+    customerphone?: string
     receiptNumber?: string
     date?: string
     amount?: number | null
@@ -50,13 +110,13 @@ interface Props {
     description?: string
 }
 
+// ===== Props =====
 const props = withDefaults(defineProps<Props>(), {
-    businessName: '',
-    contactNumber: '',
-    tin: '',
-    businessLogo: '',
-    clientName: '',
-    clientContact: '',
+    companyName: '',
+    companyLogo: null,
+    phoneNumber: '',
+    customerName: '',
+    customerphone: '',
     receiptNumber: '',
     date: '',
     amount: null,
@@ -64,11 +124,21 @@ const props = withDefaults(defineProps<Props>(), {
     description: ''
 })
 
-// Computed properties for formatting
-const formattedAmount = computed(() => {
-    if (!props.amount) return '0.00'
-    return props.amount.toFixed(2)
-})
+
+/**
+ * Formats a number with commas for thousands and fixed 2 decimal places
+ * Examples:
+ * - 1000 -> "1,000.00"
+ * - 20000 -> "20,000.00"
+ * - 1234567.89 -> "1,234,567.89"
+ */
+function formatCurrency(amount: number): string {
+    return amount.toLocaleString('en-GH', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })
+}
+
 
 const formattedDate = computed(() => {
     if (!props.date) return ''
@@ -78,4 +148,18 @@ const formattedDate = computed(() => {
         day: 'numeric'
     })
 })
+
+
 </script>
+
+<style scoped>
+/* Optional: Add smooth transitions */
+.bg-gray-50 {
+    transition: all 0.2s ease-in-out;
+}
+
+.bg-gray-50:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+</style>

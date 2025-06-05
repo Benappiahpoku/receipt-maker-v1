@@ -47,14 +47,44 @@
 </template>
 
 <script setup lang="ts">
-// No changes needed in the script section
-const shareWhatsApp = () => {
-  // Implement WhatsApp sharing logic
-  console.log('Share via WhatsApp')
+// ===== [New Feature] START =====
+/**
+ * Props for ActionHub.
+ * - invoice: The invoice data (optional for flexibility)
+ * - companyLogo: The company logo (optional for flexibility)
+ */
+withDefaults(
+  defineProps<{
+    form?: any
+    companyLogo?: string | null
+  }>(),
+  {
+    form: undefined,
+    companyLogo: null
+  }
+)
+
+const emit = defineEmits<{
+  (e: 'download-pdf'): void
+  (e: 'share-whatsapp'): void
+}>()
+// ===== [New Feature] END =====
+
+// ===== [New Feature] START =====
+/**
+ * Emits WhatsApp share event to parent.
+ */
+function shareWhatsApp() {
+  console.log('[ActionHub] WhatsApp button clicked, emitting share-whatsapp event')
+  emit('share-whatsapp')
 }
 
-const downloadPDF = () => {
-  // Implement PDF download logic
-  console.log('Download PDF')
+/**
+ * Emits PDF download event to parent.
+ */
+function downloadPDF() {
+  console.log('[ActionHub] Download PDF button clicked, emitting download-pdf event')
+  emit('download-pdf')
 }
+// ===== [New Feature] END =====
 </script>
