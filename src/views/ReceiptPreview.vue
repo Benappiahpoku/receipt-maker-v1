@@ -82,7 +82,7 @@
 
         <!-- Enhanced Footer -->
         <div class="text-center space-y-4 pt-6 border-t border-gray-200">
-            <p class="text-gray-600 font-medium">We hope to server you again soon. Thank you!</p>
+            <p class="text-gray-600 font-medium">We hope to serve you again soon. Thank you!</p>
             <div class="flex justify-center gap-2 text-xs text-gray-500">
                 <span>{{ formattedDate }}</span>
                 <span>•</span>

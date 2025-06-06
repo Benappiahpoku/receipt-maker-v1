@@ -1,3 +1,11 @@
+<!--
+  File: src/components/donation/Donation.vue
+  Purpose: Donation prompt for the Stratonea Receipt Maker app.
+  - Ghana-optimized: mobile-first, touch-friendly, clear UI.
+  - Encourages donations to support free access for Ghanaian SMEs.
+  - All copy references the Receipt Maker app.
+-->
+
 <template>
   <div 
     class="
@@ -15,17 +23,17 @@
     <div class="text-center mb-4">
       <h3 class="text-lg font-semibold text-gray-800 flex items-center justify-center gap-2">
         <span>💛</span>
-        Enjoying Our Free Invoice Maker App?
+        Enjoying Our Free Receipt Maker App?
       </h3>
     </div>
 
     <!-- Message -->
     <p class="text-gray-600 text-sm mb-4">
-      This tool is FREE for all for all Ghanaian SMEs.
+      This tool is FREE for all Ghanaian SMEs.
     </p>
     
     <p class="text-gray-600 text-sm mb-4">
-      If it helps your business, consider a donation to help us grow and reach more SMEs.
+      If our Receipt Maker helps your business, consider a donation to help us keep it free and reach more entrepreneurs.
     </p>
 
     <!-- Mobile Money Details -->
@@ -63,11 +71,11 @@
 
     <!-- Footer Message -->
     <p class="text-gray-600 text-sm text-center mb-2">
-      Every bit helps us keep improving and growing.
+      Every bit helps us keep improving and supporting Ghanaian businesses.
     </p>
 
     <p class="text-center text-gray-700 font-medium">
-      Thank you for your support! 🙏
+      Thank you for supporting Stratonea Receipt Maker! 🙏
     </p>
 
     <!-- Close Button -->
@@ -83,16 +91,21 @@
 </template>
 
 <script setup lang="ts">
-
+// ===== Imports =====
 import { useToast } from '@/composables/useToast' 
 
+// ===== Emits =====
 const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
 const toast = useToast()
 
-// Copy to clipboard function
+// ===== Methods =====
+/**
+ * Copies the provided text to clipboard and shows a toast.
+ * @param text - The text to copy (phone number or USSD code)
+ */
 async function copyToClipboard(text: string) {
   try {
     await navigator.clipboard.writeText(text)
@@ -102,7 +115,9 @@ async function copyToClipboard(text: string) {
   }
 }
 
-// Close donation prompt
+/**
+ * Emits the close event to parent to hide the donation prompt.
+ */
 function closeDonation() {
   emit('close')
 }
@@ -119,4 +134,3 @@ function closeDonation() {
   animation: fadeIn 0.3s ease-out;
 }
 </style>
-
