@@ -69,7 +69,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Customer Phone</label>
-                            <input v-model="form.customerphone" type="tel"
+                            <input v-model="form.customerPhone" type="tel"
                                 class="mt-1 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                 required />
                         </div>
@@ -137,12 +137,28 @@
                     <div class="space-y-4">
                         <ReceiptPreview :company-name="form.companyName" :company-logo="form.companyLogo"
                             :phone-number="form.phoneNumber" :customer-name="form.customerName"
-                            :customer-phone="form.customerphone" :receipt-number="form.receiptNumber" :date="form.date"
+                            :customer-phone="form.customerPhone" :receipt-number="form.receiptNumber" :date="form.date"
                             :amount="form.amount" :payment-method="form.paymentMethod"
                             :description="form.description" />
                     </div>
                 </div>
-                <AppSwitcher type="receipt" />
+                <section>
+                    <Divider />
+                </section>
+<section>
+    <ToolKitPreview />
+</section>
+                <section>
+                    <Divider />
+                </section>
+                <section>
+                    <AppSwitcher type="receipt" />
+                </section>
+
+
+
+
+
             </div>
         </div>
         <!-- ===== [New Feature] START ===== -->
@@ -160,6 +176,8 @@ import ActionHub from '../components/layout/ActionHub.vue'
 import AppSwitcher from '../components/layout/AppSwitcher.vue'
 import LogoUpload from '@/components/base/LogoUpload.vue'
 import html2pdf from 'html2pdf.js'
+import Divider from '../components/base/Divider.vue'
+import ToolKitPreview from '../components/layout/ToolKitPreview.vue'
 
 // ===== Types & Interfaces =====
 interface ReceiptForm {
@@ -167,7 +185,7 @@ interface ReceiptForm {
     companyLogo: string | null
     phoneNumber: string
     customerName: string
-    customerphone: string
+    customerPhone: string
     receiptNumber: string
     date: string
     amount: number | null
@@ -181,7 +199,7 @@ const form = reactive<ReceiptForm>({
     companyLogo: null,
     phoneNumber: '',
     customerName: '',
-    customerphone: '',
+    customerPhone: '',
     receiptNumber: '',
     date: new Date().toISOString().slice(0, 10),
     amount: null,
@@ -307,7 +325,7 @@ function handleShareWhatsApp() {
         form.receiptNumber ? `🔢 *Receipt #:* ${form.receiptNumber}` : '',
         ``,
         `👤 *To:* ${form.customerName || 'Customer'}`,
-        form.customerphone ? `📱 ${form.customerphone}` : '',
+        form.customerPhone ? `📱 ${form.customerPhone}` : '',
         ``,
         `💰 *Amount:* ₵${form.amount?.toLocaleString('en-GH', { minimumFractionDigits: 2 }) || '0.00'}`,
         `💳 *Payment Method:* ${form.paymentMethod}`,

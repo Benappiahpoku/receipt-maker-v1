@@ -24,7 +24,8 @@
               href="mailto:stratoneaconsult@gmail.com"
               class="flex items-center justify-center gap-2 hover:text-primary-200 transition-colors"
             >
-              <font-awesome-icon icon="fa-regular fa-envelope" class="text-xl" />
+           
+              <font-awesome-icon :icon="['fas', 'envelope']" class="text-xl" />
               <span>stratoneaconsult@gmail.com</span>
             </a>
           </div>

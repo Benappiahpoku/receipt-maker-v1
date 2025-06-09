@@ -46,7 +46,9 @@
                 <p class="text-gray-500">Received from</p>
                 <div class="space-y-2">
                     <p class="font-semibold text-gray-800 text-lg">{{ customerName || 'Customer Name' }}</p>
-                    <p class="text-gray-600 text-sm">{{ customerphone || 'Phone Number' }}</p>
+                    <p class="text-gray-600 text-sm">
+                        {{ customerPhone && customerPhone.trim() !== '' ? customerPhone : 'Customer Phone' }}
+                    </p>
                 </div>
             </div>
 
@@ -102,7 +104,7 @@ interface Props {
     phoneNumber?: string
 
     customerName?: string
-    customerphone?: string
+    customerPhone?: string
     receiptNumber?: string
     date?: string
     amount?: number | null
@@ -116,7 +118,7 @@ const props = withDefaults(defineProps<Props>(), {
     companyLogo: null,
     phoneNumber: '',
     customerName: '',
-    customerphone: '',
+    customerPhone: '',
     receiptNumber: '',
     date: '',
     amount: null,
