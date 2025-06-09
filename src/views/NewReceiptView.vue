@@ -281,7 +281,7 @@ function handleDownloadPDF() {
     const fileName = `Receipt-${form.receiptNumber}${form.customerName ? '--' + form.customerName.trim() : ''}.pdf`
 
     const opt = {
-        margin: [0.5, 0.8, 0.5, 0.8], // [top, right, bottom, left] margins in inches
+        margin: [0.5, 0.7, 0.5, 0.7], // [top, right, bottom, left] margins in inches
         filename: fileName,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
