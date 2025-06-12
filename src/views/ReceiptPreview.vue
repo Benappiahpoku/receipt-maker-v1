@@ -59,7 +59,7 @@
                 <div class="bg-primary-50 p-4 rounded-lg text-center">
                     <p class="text-primary-600 text-sm mb-1">Amount Paid</p>
                     <p class="text-3xl font-bold text-primary-700">
-                        GHS {{ formatCurrency(amount ?? 0 ) }}
+                        {{ currencySymbol + " " }} {{ formatCurrency(amount ?? 0 ) }}
                     </p>
                 </div>
 
@@ -111,6 +111,7 @@ interface Props {
     amount?: number | null
     paymentMethod?: string
     description?: string
+    currency: string
 }
 
 // ===== Props =====
@@ -124,9 +125,29 @@ const props = withDefaults(defineProps<Props>(), {
     date: '',
     amount: null,
     paymentMethod: 'Cash',
-    description: ''
+    description: '',
+    currency: 'GHS'
 })
 
+
+const currencySymbol = computed(() => {
+    // Map of currency codes to symbols
+    const symbols: Record<string, string> = {
+        GHS: '₵',
+        NGN: '₦',
+        KES: 'KSh',
+        ZAR: 'R',
+        XOF: 'CFA ',
+        INR: '₹',
+        USD: '$',
+        EUR: '€',
+        GBP: '£',
+        CAD: 'CA$',
+        AUD: 'A$'
+    }
+    // Default to code if not found
+    return symbols[props.currency] || props.currency + ' '
+})
 
 /**
  * Formats a number with commas for thousands and fixed 2 decimal places

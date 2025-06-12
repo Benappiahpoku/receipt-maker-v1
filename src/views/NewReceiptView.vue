@@ -59,6 +59,18 @@
                     </p>
                     <!-- ===== [New Feature] END ===== -->
 
+                    <!-- ===== Choose Currency  ===== -->
+                    <div class="space-y-4 pt-6 border-t mt-6">
+                    </div>
+                    <!-- Currency Selector Section -->
+                    <section>
+                        <!--
+              Pass modelValue and @update:modelValue for v-model compatibility.
+              This ensures the component works with TypeScript strict prop checks.
+            -->
+                        <CurrencySelector :modelValue="form.currency" @update:modelValue="val => form.currency = val" />
+                    </section>
+
                     <!-- Customer Information -->
                     <div class="space-y-4 pt-6 border-t mt-6">
                         <div>
@@ -108,10 +120,10 @@
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Amount (GHS)</label>
+                            <label class="block text-sm font-medium text-gray-700">Amount</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <span class="text-gray-500 sm:text-sm">₵</span>
+                                    <span class="text-gray-500 sm:text-sm">{{ currencySymbol }}</span>
                                 </div>
                                 <input v-model="form.amount" type="number" min="0" step="0.01"
                                     class="block w-full pl-7 pr-3 py-3 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500"
@@ -138,16 +150,16 @@
                         <ReceiptPreview :company-name="form.companyName" :company-logo="form.companyLogo"
                             :phone-number="form.phoneNumber" :customer-name="form.customerName"
                             :customer-phone="form.customerPhone" :receipt-number="form.receiptNumber" :date="form.date"
-                            :amount="form.amount" :payment-method="form.paymentMethod"
-                            :description="form.description" />
+                            :amount="form.amount" :payment-method="form.paymentMethod" :description="form.description"
+                            :currency="form.currency" />
                     </div>
                 </div>
                 <section>
                     <Divider />
                 </section>
-<section>
-    <ToolKitPreview />
-</section>
+                <section>
+                    <ToolKitPreview />
+                </section>
                 <section>
                     <Divider />
                 </section>
@@ -169,7 +181,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted,computed } from 'vue'
 import localforage from 'localforage'
 import ReceiptPreview from './ReceiptPreview.vue'
 import ActionHub from '../components/layout/ActionHub.vue'
@@ -178,6 +190,7 @@ import LogoUpload from '@/components/base/LogoUpload.vue'
 import html2pdf from 'html2pdf.js'
 import Divider from '../components/base/Divider.vue'
 import ToolKitPreview from '../components/layout/ToolKitPreview.vue'
+import CurrencySelector from '@/components/layout/CurrencySelector.vue'
 
 // ===== Types & Interfaces =====
 interface ReceiptForm {
@@ -191,6 +204,7 @@ interface ReceiptForm {
     amount: number | null
     paymentMethod: string
     description: string
+    currency: string
 }
 
 // ===== Main Logic =====
@@ -204,7 +218,8 @@ const form = reactive<ReceiptForm>({
     date: new Date().toISOString().slice(0, 10),
     amount: null,
     paymentMethod: 'Cash',
-    description: ''
+    description: '',
+    currency:'GHS'
 })
 
 // Set the initial receipt number on mount
@@ -214,6 +229,27 @@ onMounted(async () => {
 })
 
 
+
+
+
+const currencySymbol = computed(() => {
+    // Map of currency codes to symbols
+    const symbols: Record<string, string> = {
+        GHS: '₵',
+        NGN: '₦',
+        KES: 'KSh',
+        ZAR: 'R',
+        XOF: 'CFA ',
+        INR: '₹',
+        USD: '$',
+        EUR: '€',
+        GBP: '£',
+        CAD: 'CA$',
+        AUD: 'A$'
+    }
+    // Default to code if not found
+    return symbols[form.currency] || form.currency + ' '
+})
 // ===== Helper Functions =====
 /**
  * Generates the next consecutive receipt number in the format YYYY-XXXX.
