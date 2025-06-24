@@ -11,10 +11,10 @@
                 <!-- Main Message -->
                 <div class="space-y-2">
                     <h2 class="text-xl sm:text-2xl font-bold text-white">
-                        Explore More Free Tools
+                        Need help growing your business?
                     </h2>
                     <p class="text-primary-100 text-sm sm:text-base">
-                        (Some are live. Some are in the lab)
+                        These 3 articles will help you grow a smarter, better business - all free
                     </p>
                 </div>
 
@@ -28,12 +28,12 @@
                 </div>
 
                 <!-- Optional: View All or Shuffle -->
-                <div class="pt-4">
+                <!-- <div class="pt-4">
                     <button @click="showNextTools"
                         class="text-white text-sm underline underline-offset-4 hover:text-primary-200 transition">
                         Show More Tools
                     </button>
-                </div>
+                </div> -->
 
                 <!-- Background Pattern -->
                 <div class="absolute inset-0 bg-pattern opacity-5 rounded-lg pointer-events-none"></div>
@@ -47,12 +47,9 @@ import { ref } from 'vue'
 
 // === Tool List (can be randomized or paginated) ===
 const fullToolList = [
-    { name: '✅ Invoice Maker', description: 'Create professional invoices with tax and branding', link: 'https://invoicemaker-eosin.vercel.app/' },
-    { name: '✅ Receipt Maker', description: 'Generate clean, printable receipts in seconds', link: 'https://receiptmaker-ten.vercel.app/' },
-    { name: '🧪 Income Tracker', description: 'Record and manage your daily income streams', link: '#' },
-    { name: '🧪 Expense Tracker', description: 'Keep an eye on where your money goes', link: '#' },
-    { name: '🧪 Susu Tracker', description: 'Track savings contributions and group funds', link: '#' },
-    { name: '🧪 Debt Tracker', description: 'Log debts and repayments to stay on top', link: '#' },
+    // { name: '✅ Invoice Maker', description: 'Create professional invoices with tax and branding', link: 'https://invoicemaker-eosin.vercel.app/' },
+    // { name: '✅ Receipt Maker', description: 'Generate clean, printable receipts in seconds', link: 'https://receiptmaker-ten.vercel.app/' },
+    // { name: '🧪 Income Tracker', description: 'Record and manage your daily income streams', link: '#' },
     { name: '📖 7 Quick Actions to Double Your Sales', description: 'Practical steps to boost revenue without spending more - Learn More ...', link: 'https://benappiahpoku.com/7-quick-actions-you-can-do-today-to-double-your-sales/' },
     { name: '📖 The WhatsApp Business Advantage', description: 'Step-by-step guide for entrepreneurs in Ghana to boost sales and engagement - Learn More ...', link: 'https://benappiahpoku.com/the-whatsapp-business-advantage-step-by-step-guide-for-entrepreneurs-in-ghana/' }, 
     { name: '📖 Demystifying Digital Marketing', description: 'Build your online presence, one step at a time - Learn More ...', link: 'https://benappiahpoku.com/demystifying-digital-marketing-building-your-online-presence-one-step-at-a-time/' },
@@ -66,17 +63,17 @@ const tools = ref(fullToolList.slice(currentIndex.value, currentIndex.value + 3)
  * showNextTools
  * Shows the next 3 tools in the list, looping back to start if at the end.
  */
-const showNextTools = () => {
-    // Calculate the next index (loop back if at end)
-    currentIndex.value = (currentIndex.value + 3) % fullToolList.length
-    // If at the end, slice will wrap around to the start
-    if (currentIndex.value + 3 <= fullToolList.length) {
-        tools.value = fullToolList.slice(currentIndex.value, currentIndex.value + 3)
-    } else {
-        // If less than 3 left, show remaining + start from beginning
-        tools.value = fullToolList.slice(currentIndex.value).concat(fullToolList.slice(0, (currentIndex.value + 3) % fullToolList.length))
-    }
-}
+// const showNextTools = () => {
+//     // Calculate the next index (loop back if at end)
+//     currentIndex.value = (currentIndex.value + 3) % fullToolList.length
+//     // If at the end, slice will wrap around to the start
+//     if (currentIndex.value + 3 <= fullToolList.length) {
+//         tools.value = fullToolList.slice(currentIndex.value, currentIndex.value + 3)
+//     } else {
+//         // If less than 3 left, show remaining + start from beginning
+//         tools.value = fullToolList.slice(currentIndex.value).concat(fullToolList.slice(0, (currentIndex.value + 3) % fullToolList.length))
+//     }
+// }
 </script>
 
 <style scoped>

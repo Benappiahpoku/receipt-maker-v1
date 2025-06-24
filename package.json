@@ -28,6 +28,7 @@
     "@vercel/analytics": "^1.5.0",
     "@vueuse/core": "^13.1.0",
     "axios-retry": "^4.5.0",
+    "firebase": "^11.9.1",
     "html2pdf.js": "^0.10.3",
     "localforage": "^1.10.0",
     "pinia": "^3.0.2",

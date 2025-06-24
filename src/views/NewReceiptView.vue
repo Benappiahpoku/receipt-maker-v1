@@ -157,6 +157,18 @@
                 <section>
                     <Divider />
                 </section>
+                <ActionButtons @download-pdf="handleDownloadPDF" @share-whatsapp="handleShareWhatsApp"
+                    @reset-invoice-counter="resetInvoiceCounted" />
+                <section>
+                    <Divider />
+                </section>
+
+
+                <InvoiceCounter />
+
+                <section>
+                    <Divider />
+                </section>
                 <section>
                     <ToolKitPreview />
                 </section>
@@ -181,7 +193,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted,computed } from 'vue'
+import { ref, reactive, onMounted, computed } from 'vue'
 import localforage from 'localforage'
 import ReceiptPreview from './ReceiptPreview.vue'
 import ActionHub from '../components/layout/ActionHub.vue'
@@ -191,6 +203,12 @@ import html2pdf from 'html2pdf.js'
 import Divider from '../components/base/Divider.vue'
 import ToolKitPreview from '../components/layout/ToolKitPreview.vue'
 import CurrencySelector from '@/components/layout/CurrencySelector.vue'
+import InvoiceCounter from '@/components/layout/InvoiceCounter.vue'
+import { useInvoiceCounter } from '@/composables/useInvoiceCounter.ts'
+import ActionButtons from '@/components/layout/ActionButtons.vue'
+
+
+const { incrementInvoiceCount } = useInvoiceCounter()
 
 // ===== Types & Interfaces =====
 interface ReceiptForm {
@@ -219,8 +237,17 @@ const form = reactive<ReceiptForm>({
     amount: null,
     paymentMethod: 'Cash',
     description: '',
-    currency:'GHS'
+    currency: 'GHS'
 })
+
+
+// ===== Invoice Count State =====
+/**
+ * Tracks if the current invoice has already been counted for analytics.
+ * This prevents double-counting when both download and share are triggered.
+ */
+const invoiceCounted = ref(false)
+
 
 // Set the initial receipt number on mount
 
@@ -342,6 +369,15 @@ function handleDownloadPDF() {
         .catch(() => {
             alert('Could not generate PDF. Please try again or check your internet connection.')
         })
+
+    if (!invoiceCounted.value) {
+        incrementInvoiceCount()
+        invoiceCounted.value = true
+        console.log('[Receipt] Counter incremented!')
+    } else {
+        console.log('[Receipt] Counter NOT incremented (already counted for this invoice)')
+    }
+    resetInvoiceCounted()
 }
 
 /**
@@ -378,6 +414,16 @@ function handleShareWhatsApp() {
 
     // 3. Open WhatsApp
     window.open(waUrl, '_blank')
+
+
+    if (!invoiceCounted.value) {
+        incrementInvoiceCount()
+        invoiceCounted.value = true
+        console.log('[Receipt] Counter incremented!')
+    } else {
+        console.log('[Receipt] Counter NOT incremented (already counted for this invoice)')
+    }
+    resetInvoiceCounted()
 }
 
 // ===== [Save Defaults Feature] START =====
@@ -432,5 +478,13 @@ async function clearDefaults() {
     defaultSavedMessage.value = 'Defaults cleared.'
     defaultErrorMessage.value = null
 }
-// ===== [Save Defaults Feature] END =====
+
+
+
+/**
+ * Resets the invoice counted flag when starting a new invoice.
+ */
+function resetInvoiceCounted() {
+    invoiceCounted.value = false
+}
 </script>
