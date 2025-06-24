@@ -51,7 +51,7 @@
           min-h-[48px]
         ">
                 <font-awesome-icon icon="fa-solid fa-plus-circle" />
-                <span class="font-bold">New Invoice</span>
+                <span class="font-bold">New Receipt</span>
             </button>
         </div>
     </div>

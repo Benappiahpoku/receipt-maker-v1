@@ -26,7 +26,7 @@
                 <!-- Modern, simple sentence -->
                 <span>
                     <strong class="text-primary font-semibold">{{ formattedCount }}</strong>
-                    invoices already generated and counting
+                    receipts already generated and counting
                 </span>
             </p>
         </div>
