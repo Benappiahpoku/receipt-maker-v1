@@ -22,7 +22,7 @@
 
                     <span class="inline-block" style="vertical-align: middle; line-height: 1;">
                         {{ phoneNumber || '024 XXX XXXX' }}
-                        
+
                     </span>
                 </div>
             </div>
@@ -90,6 +90,10 @@
                 <span>{{ formattedDate }}</span>
                 <span>•</span>
                 <span>Receipt ID: REC-{{ receiptNumber }}</span>
+            </div>
+    
+            <div class="flex justify-center gap-2 text-xs text-gray-600">
+                <span>Software developed by TekLumen (+233 594093926)</span>
             </div>
         </div>
     </div>

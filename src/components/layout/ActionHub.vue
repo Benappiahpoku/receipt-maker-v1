@@ -26,21 +26,25 @@
     </div>
 
     <!-- Mobile View -->
-    <div class="md:hidden flex justify-around items-center h-16">
-      <router-link to="/" class="text-primary-600 hover:text-primary-700">
-        <font-awesome-icon icon="fa-solid fa-home" class="text-2xl" />
+    <div class="md:hidden flex justify-around items-center h-20 py-2">
+      <router-link to="/" class="flex flex-col items-center text-primary-600 hover:text-primary-700">
+        <font-awesome-icon icon="fa-solid fa-home" class="text-2xl mb-1" />
+        <span class="text-xs">Home</span>
       </router-link>
 
-      <button @click="handleNewReceipt" class="text-primary-600 hover:text-primary-700">
-        <font-awesome-icon icon="fa-solid fa-plus-circle" class="text-2xl" />
+      <button @click="handleNewReceipt" class="flex flex-col items-center text-primary-600 hover:text-primary-700">
+        <font-awesome-icon icon="fa-solid fa-plus-circle" class="text-2xl mb-1" />
+        <span class="text-xs">New Receipt</span>
       </button>
 
-      <button @click="shareWhatsApp" class="text-green-600 hover:text-green-700">
-        <font-awesome-icon icon="fa-brands fa-whatsapp" class="text-2xl" />
+      <button @click="shareWhatsApp" class="flex flex-col items-center text-green-600 hover:text-green-700">
+        <font-awesome-icon icon="fa-brands fa-whatsapp" class="text-2xl mb-1" />
+        <span class="text-xs">Share WhatsApp</span>
       </button>
 
-      <button @click="downloadPDF" class="text-primary-600 hover:text-primary-700">
-        <font-awesome-icon icon="fa-solid fa-download" class="text-2xl" />
+      <button @click="downloadPDF" class="flex flex-col items-center text-primary-600 hover:text-primary-700">
+        <font-awesome-icon icon="fa-solid fa-download" class="text-2xl mb-1" />
+        <span class="text-xs">Download PDF</span>
       </button>
     </div>
   </div>
@@ -72,9 +76,7 @@ const emit = defineEmits<{
   (e: 'download-pdf'): void
   (e: 'share-whatsapp'): void
 }>()
-// ===== [New Feature] END =====
 
-// ===== [New Feature] START =====
 /**
  * Emits WhatsApp share event to parent.
  */
