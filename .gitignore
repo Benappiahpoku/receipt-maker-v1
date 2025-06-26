@@ -24,7 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 
-
 # Environment files
 .env
 .env.local
@@ -33,3 +32,6 @@ dist-ssr
 
 # Build output
 dist/
+
+#Vercel
+.vercelFirebaseDeployment
