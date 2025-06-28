@@ -8,9 +8,9 @@
 <template>
     <div class="min-h-screen bg-gray-50">
         <!-- Header -->
-        <header class="bg-primary shadow-sm">
+        <header class=" shadow-sm">
             <div class="max-w-xl mx-auto px-4 py-4">
-                <h1 class="text-2xl font-bold text-center text-white">Receipt Generator</h1>
+                <h1 class="text-2xl font-bold text-center text-black">Create New Receipt</h1>
             </div>
         </header>
 
@@ -21,6 +21,7 @@
                 <form @submit.prevent="handleGenerate" class="bg-white rounded-lg shadow p-6">
                     <!-- Company Information -->
                     <div class="space-y-4">
+                        <LogoUpload v-model:logo="form.companyLogo" />
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Company Name</label>
                             <input v-model="form.companyName" type="text"
@@ -34,7 +35,7 @@
                                 required />
                         </div>
                         <!-- Logo Upload -->
-                        <LogoUpload v-model:logo="form.companyLogo" />
+
                     </div>
                     <div class="space-y-4 pt-6 border-t mt-6"></div>
 
@@ -140,9 +141,9 @@
                 </form>
 
                 <!-- Live Preview -->
-                <header class="bg-primary shadow-sm">
+                <header class=" shadow-sm">
                     <div class="max-w-xl mx-auto px-4 py-4">
-                        <h1 class="text-2xl font-bold text-center text-white"> Preview Receipt</h1>
+                        <h1 class="text-2xl font-bold text-center text-black">  Receipt Preview</h1>
                     </div>
                 </header>
                 <div class="space-y-4">
