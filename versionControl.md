@@ -23,3 +23,7 @@ git branch -d dev
 
 <!-- delete branch on github -->
 git push origin --delete dev
+
+### Vercel Mess
+
+vercel mess dealing with it
