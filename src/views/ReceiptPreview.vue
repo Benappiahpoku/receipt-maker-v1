@@ -93,7 +93,7 @@
             </div>
     
             <div class="flex justify-center gap-2 text-xs text-gray-600">
-                <span>Software developed by TekLumen (+233 594093926)</span>
+                <span>Software developed by TekLumin (+233 594093926)</span>
             </div>
         </div>
     </div>

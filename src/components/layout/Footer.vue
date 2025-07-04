@@ -60,7 +60,7 @@
         <p class="text-sm text-primary-200">
           © {{ new Date().getFullYear() }} Created with
           <span class="mx-1 animate-pulse">❤️</span>
-          by TekLumen
+          by TekLumin
         </p>
         <div class="flex items-center justify-center gap-2 text-xs text-primary-200">
           <span>Made in</span>

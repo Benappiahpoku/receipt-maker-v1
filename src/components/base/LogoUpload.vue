@@ -138,13 +138,6 @@ onMounted(async () => {
 })
 
 
-// Import in parent template
-    //   <!-- Replace the old logo upload with new component -->
-   // < LogoUpload v - model: logo = "form.companyLogo" />
-
-//Import the need scripts
-// import LogoUpload from '@/components/base/LogoUpload.vue' // Logo Import
-
 
 
 </script>
