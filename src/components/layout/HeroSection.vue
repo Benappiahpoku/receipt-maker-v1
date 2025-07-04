@@ -25,7 +25,7 @@
             <!-- Image Section with Animation -->
             <div class="order-1 lg:order-2 w-full md:w-1/2 mb-4">
                 <!-- Updated image container with reduced size -->
-                <div class="animate-float px-8 md:px-0">
+                <div class="animate-float px-10 md:px-0">
                     <img src="/receipt.webp" alt="Receipt preview on mobile phone"
                         class="w-[60%] md:w-[55%] max-w-md mx-auto rounded-lg " loading="eager" />
                 </div>
