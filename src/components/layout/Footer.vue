@@ -65,7 +65,7 @@
         <div class="flex items-center justify-center gap-2 text-xs text-primary-200">
           <span>Made in</span>
             <img 
-              src="/ghana-flag.png" 
+              src="/ghana-flag.webp" 
               alt="Ghana Flag" 
               class="w-4 h-4 rounded-sm" 
             />
