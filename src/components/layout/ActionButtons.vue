@@ -6,13 +6,13 @@
 -->
 
 <template>
-    <div class="action-buttons w-full flex justify-center">
-        <!-- Mobile-First Button Group -->
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
-            <!-- Download Button -->
-            <button @click="handleDownload" class="
+  <div class="action-buttons w-full flex justify-center">
+    <!-- Mobile-First Button Group -->
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
+      <!-- Download Button -->
+      <button @click="handleDownload" class="
           flex items-center justify-center gap-2
-          px-6 py-3 rounded-lg
+          px-6 md:px-4 py-3 rounded-lg
           bg-primary text-white
           hover:bg-primary-dark
           active:transform active:scale-95
@@ -20,14 +20,14 @@
           shadow-sm hover:shadow
           min-h-[48px]
         ">
-                <font-awesome-icon icon="fa-solid fa-download" />
-                <span>Download PDF</span>
-            </button>
+        <font-awesome-icon icon="fa-solid fa-download" />
+        <span>Download PDF</span>
+      </button>
 
-            <!-- Share WhatsApp Button -->
-            <button @click="handleShare" class="
+      <!-- Share WhatsApp Button -->
+      <button @click="handleShare" class="
           flex items-center justify-center gap-2
-          px-6 py-3 rounded-lg
+          px-6 md:px-4 py-3 rounded-lg
           bg-green-600 text-white
           hover:bg-green-700
           active:transform active:scale-95
@@ -35,14 +35,14 @@
           shadow-sm hover:shadow
           min-h-[48px]
         ">
-                <font-awesome-icon icon="fa-brands fa-whatsapp" />
-                <span>Share WhatsApp</span>
-            </button>
+        <font-awesome-icon icon="fa-brands fa-whatsapp" />
+        <span>Share WhatsApp</span>
+      </button>
 
-            <!-- New Invoice Button -->
-            <button @click="handleNewInvoice" class="
+      <!-- New Invoice Button -->
+      <button @click="handleNewInvoice" class="
           flex items-center justify-center gap-2
-          px-6 py-3 rounded-lg
+          px-6 md:px-4 py-3 rounded-lg 
           bg-gray-300 text-primary-700
           hover:bg-gray-200
           active:transform active:scale-95
@@ -50,11 +50,11 @@
           shadow-sm hover:shadow
           min-h-[48px]
         ">
-                <font-awesome-icon icon="fa-solid fa-plus-circle" />
-                <span class="font-bold">New Receipt</span>
-            </button>
-        </div>
+        <font-awesome-icon icon="fa-solid fa-plus-circle" />
+        <span class="font-bold">New Receipt</span>
+      </button>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
