@@ -24,8 +24,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Stratonea App',
-        short_name: 'Stratonea',
+        name: 'Stratonea Receipt Maker',
+        short_name: 'Receipt Maker',
         description: 'A mobile-first application optimized for Ghana\'s connectivity conditions',
         theme_color: '#1F3A8A',
         icons: [
