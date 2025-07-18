@@ -208,6 +208,7 @@ import InvoiceCounter from '@/components/layout/InvoiceCounter.vue'
 import { useInvoiceCounter } from '@/composables/useInvoiceCounter.ts'
 import ActionButtons from '@/components/layout/ActionButtons.vue'
 
+import { useDefaultCurrency } from '@/utils/useDefaultCurrency'
 
 const { incrementInvoiceCount } = useInvoiceCounter()
 
@@ -240,6 +241,23 @@ const form = reactive<ReceiptForm>({
     description: '',
     currency: 'GHS'
 })
+
+
+/**
+ * On first load, auto-detect and set default currency using browser timezone.
+ * - Only sets if user hasn't chosen before (first visit).
+ * - User can override by changing currency in UI.
+ * - Uses localStorage flag to remember if auto-detect has run.
+ */
+onMounted(() => {
+    const hasSetCurrency = localStorage.getItem('currencyAutoSet')
+    if (!hasSetCurrency) {
+        const detected = useDefaultCurrency()
+        form.currency = detected.code
+        localStorage.setItem('currencyAutoSet', '1')
+    }
+})
+// 
 
 
 // ===== Invoice Count State =====

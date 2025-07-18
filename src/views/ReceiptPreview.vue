@@ -101,6 +101,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useDefaultCurrency } from '@/utils/useDefaultCurrency'
+
 
 // ===== Types & Interfaces =====
 interface Props {
@@ -135,7 +137,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 
 const currencySymbol = computed(() => {
-    // Map of currency codes to symbols
+    // Try to get symbol from config
+
+    const { symbol } = useDefaultCurrency()
     const symbols: Record<string, string> = {
         GHS: 'GHS',
         NGN: '₦',
@@ -150,7 +154,7 @@ const currencySymbol = computed(() => {
         AUD: 'A$'
     }
     // Default to code if not found
-    return symbols[props.currency] || props.currency + ' '
+    return symbols[props.currency] || symbol|| props.currency + ' '
 })
 
 /**
