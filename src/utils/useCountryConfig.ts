@@ -9,7 +9,7 @@ export interface CountryData {
 
 // ===== [Expanded Map] =====
 export const timeZoneToCountry: Record<string, CountryData> = {
-    'Africa/Accra': { country: 'Ghana', currency: 'GHS', currencySymbol: 'GHS' },
+    'Africa/Accra': { country: 'Ghana', currency: 'GHS', currencySymbol: 'GH₵' },
     'Africa/Lagos': { country: 'Nigeria', currency: 'NGN', currencySymbol: '₦' },
     'Africa/Nairobi': { country: 'Kenya', currency: 'KES', currencySymbol: 'KSh' },
     'Africa/Johannesburg': { country: 'South Africa', currency: 'ZAR', currencySymbol: 'R' },

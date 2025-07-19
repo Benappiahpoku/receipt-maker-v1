@@ -42,7 +42,7 @@ export function useDefaultCurrency(): DefaultCurrencyResult {
 
   // 3. Fallback to GHS (Ghana) if not found
   if (!countryData) {
-    return { code: 'GHS', symbol: 'GHS', country: 'Ghana' }
+    return { code: 'GHS', symbol: 'GH₵', country: 'Ghana' }
   }
 
   return {

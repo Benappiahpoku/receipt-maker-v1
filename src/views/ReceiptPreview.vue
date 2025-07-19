@@ -141,7 +141,7 @@ const currencySymbol = computed(() => {
 
     const { symbol } = useDefaultCurrency()
     const symbols: Record<string, string> = {
-        GHS: 'GHS',
+        GHS: 'GH₵',
         NGN: '₦',
         KES: 'KSh',
         ZAR: 'R',
