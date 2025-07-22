@@ -15,6 +15,13 @@
               <span>WhatsApp: +233 59 409 3926</span>
             </a>
 
+            <!-- Share Free Tool via WhatsApp with pre-filled message -->
+            <a :href="whatsAppShareUrl" target="_blank" rel="noopener noreferrer"
+              class="flex items-center justify-center gap-2 hover:text-primary-200 transition-colors">
+              <font-awesome-icon icon="fa-brands fa-whatsapp" class="text-xl" />
+              <span class="font-bold">Share this Free Tool</span>
+            </a>
+
             <!-- Email -->
             <a href="mailto:stratoneaconsult@gmail.com"
               class="flex items-center justify-center gap-2 hover:text-primary-200 transition-colors">
@@ -67,6 +74,11 @@
 import { useToast } from '@/composables/useToast'
 
 const toast = useToast()
+
+const shareMessage =
+  "Hey! I found this helpful free Receipt maker tool. Thought you might like it. https://receipt.stratonea.com/"
+const whatsAppShareUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`
+
 
 // ===== [Fix] Updated Toast Function Calls =====
 async function copyToClipboard(text: string) {
