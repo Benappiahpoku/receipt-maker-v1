@@ -127,7 +127,7 @@
                                     <span class="text-gray-500 sm:text-sm">{{ currencySymbol }}</span>
                                 </div>
                                 <input v-model="form.amount" type="number" min="0" step="0.01"
-                                    class="block w-full pl-7 pr-3 py-3 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                                    class="block w-full pl-12 pr-3 py-3 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                                     required />
                             </div>
                         </div>
@@ -389,6 +389,12 @@ function handleDownloadPDF() {
             alert('Could not generate PDF. Please try again or check your internet connection.')
         })
 
+    // 4. Toast for Invoice downloaded successfully
+
+
+    
+    
+        // 5. Count number of invoices
     if (!invoiceCounted.value) {
         incrementInvoiceCount()
         invoiceCounted.value = true
