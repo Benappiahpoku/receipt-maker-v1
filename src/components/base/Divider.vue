@@ -1,5 +1,5 @@
 <template>
-    <div class="space-y-4 pt-6 border-t mt-6"></div>
+    <div class="space-y-4 pt-4 border-t mt-4"></div>
 
 </template>
 

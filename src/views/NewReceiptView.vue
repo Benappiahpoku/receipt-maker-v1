@@ -140,10 +140,17 @@
                     </div>
                 </form>
 
+
+                <Divider />
+<Banner />
+                <Divider />
+
+
+
                 <!-- Live Preview -->
                 <header class=" shadow-sm">
                     <div class="max-w-xl mx-auto px-4 py-4">
-                        <h1 class="text-2xl font-bold text-center text-black">  Receipt Preview</h1>
+                        <h1 class="text-2xl font-bold text-center text-black"> Receipt Preview</h1>
                     </div>
                 </header>
                 <div class="space-y-4">
@@ -209,6 +216,7 @@ import { useInvoiceCounter } from '@/composables/useInvoiceCounter.ts'
 import ActionButtons from '@/components/layout/ActionButtons.vue'
 
 import { useDefaultCurrency } from '@/utils/useDefaultCurrency'
+import Banner from '@/components/ads/Banner.vue'
 
 const { incrementInvoiceCount } = useInvoiceCounter()
 

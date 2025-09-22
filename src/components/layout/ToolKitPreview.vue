@@ -50,9 +50,9 @@ const fullToolList = [
     // { name: '✅ Invoice Maker', description: 'Create professional invoices with tax and branding', link: 'https://invoicemaker-eosin.vercel.app/' },
     // { name: '✅ Receipt Maker', description: 'Generate clean, printable receipts in seconds', link: 'https://receiptmaker-ten.vercel.app/' },
     // { name: '🧪 Income Tracker', description: 'Record and manage your daily income streams', link: '#' },
-    { name: '📖 7 Quick Actions to Double Your Sales', description: 'Practical steps to boost revenue without spending more - Learn More ...', link: 'https://benappiahpoku.com/7-quick-actions-you-can-do-today-to-double-your-sales/' },
-    { name: '📖 The WhatsApp Business Advantage', description: 'Step-by-step guide for entrepreneurs in Ghana to boost sales and engagement - Learn More ...', link: 'https://benappiahpoku.com/the-whatsapp-business-advantage-step-by-step-guide-for-entrepreneurs-in-ghana/' }, 
-    { name: '📖 Demystifying Digital Marketing', description: 'Build your online presence, one step at a time - Learn More ...', link: 'https://benappiahpoku.com/demystifying-digital-marketing-building-your-online-presence-one-step-at-a-time/' },
+    { name: '📖 7 Quick Actions to Double Your Sales', description: 'Practical steps to boost revenue without spending more - Learn More ...', link: 'https://benappiahpoku.com/blog/7-quick-actions-you-can-do-today-to-double-your-sales/' },
+    { name: '📖 The WhatsApp Business Advantage', description: 'Step-by-step guide for entrepreneurs in Ghana to boost sales and engagement - Learn More ...', link: 'https://benappiahpoku.com/blog/the-whatsapp-business-advantage-step-by-step-guide-for-entrepreneurs-in-ghana/' }, 
+    { name: '📖 Demystifying Digital Marketing', description: 'Build your online presence, one step at a time - Learn More ...', link: 'https://benappiahpoku.com/blog/demystifying-digital-marketing-building-your-online-presence-one-step-at-a-time/' },
 ]
 
 // Show the first 3 tools by default
