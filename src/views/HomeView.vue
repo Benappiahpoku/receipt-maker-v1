@@ -7,7 +7,7 @@
 
       <!-- How It Works Section -->
       <section class="mb-16">
-        <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+        <h2 class="text-3xl font-bold text-center mb-12">Generate Receipts in Seconds</h2>
         <div class="grid md:grid-cols-3 gap-8">
           <div class="text-center p-6 bg-white rounded-lg shadow-md">
             <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
@@ -41,7 +41,7 @@
 
       <!-- Key Features Section -->
       <section class="mb-16">
-        <h2 class="text-3xl font-bold text-center mb-12">Key Features</h2>
+        <h2 class="text-3xl font-bold text-center mb-12">Safe and Offline-Friendly</h2>
         <div class="grid md:grid-cols-3 gap-8">
           <div class="text-center p-6 bg-white rounded-lg shadow-md">
             <h3 class="text-xl font-semibold mb-4">100% Free</h3>
@@ -58,7 +58,25 @@
         </div>
       </section>
 
-     
+      <!-- Why SMEs Love This Tool Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-12">Why SMEs Love This Tool</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center p-6 bg-white rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">No Internet Required</h3>
+            <p class="text-gray-600">Our smart free tool works completely offline, perfect for areas with poor connectivity in Ghana, Nigeria, and Kenya.</p>
+          </div>
+          <div class="text-center p-6 bg-white rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">Professional Receipts</h3>
+            <p class="text-gray-600">Generate high-quality receipts instantly with our free receipt maker online, trusted by thousands of SMEs.</p>
+          </div>
+          <div class="text-center p-6 bg-white rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">Mobile Optimized</h3>
+            <p class="text-gray-600">Designed specifically for receipt maker for SMEs on mobile devices, with touch-friendly interfaces and fast performance.</p>
+          </div>
+        </div>
+      </section>
+
       <!-- New Invoice View Section -->
       <section class="mt-16 pt-16 border-t border-gray-200">
         <div class="max-w-5xl mx-auto">
@@ -72,8 +90,66 @@
 
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head'
 import HeroSection from '@/components/layout/HeroSection.vue';
 import NewReceiptView from './NewReceiptView.vue'
+
+// Set meta tags for SEO
+useHead({
+  title: 'Free Smart Receipt Maker for SMEs | Generate Receipts Instantly',
+  meta: [
+    {
+      name: 'description',
+      content: 'Create receipts instantly with our smart, free receipt maker. Built for SMEs in Ghana, Nigeria, and Kenya. Simple and reliable.'
+    },
+    {
+      name: 'keywords',
+      content: 'smart free tool, receipt generator, free receipt maker online, receipt maker for SMEs, Ghana receipt maker, Nigeria receipt maker, Kenya receipt maker'
+    },
+    {
+      property: 'og:title',
+      content: 'Free Smart Receipt Maker for SMEs | Generate Receipts Instantly'
+    },
+    {
+      property: 'og:description',
+      content: 'Create receipts instantly with our smart, free receipt maker. Built for SMEs in Ghana, Nigeria, and Kenya. Simple and reliable.'
+    },
+    {
+      property: 'og:type',
+      content: 'website'
+    }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free Smart Receipt Maker for SMEs",
+        "description": "Create receipts instantly with our smart, free receipt maker. Built for SMEs in Ghana, Nigeria, and Kenya.",
+        "url": "https://receiptmaker-ten.vercel.app/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "creator": {
+          "@type": "Organization",
+          "name": "Stratonea",
+          "url": "https://stratonea.com"
+        },
+        "featureList": [
+          "Offline functionality",
+          "PDF generation",
+          "WhatsApp sharing",
+          "Mobile optimized"
+        ]
+      })
+    }
+  ]
+})
 </script>
 
 <style scoped>

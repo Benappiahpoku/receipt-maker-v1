@@ -9,9 +9,9 @@
                 <!-- Updated text alignment and width -->
                 <div class="text-center md:text-left mb-8 md:mb-0">
                     <h1 class="text-2xl md:text-5xl font-bold text-primary mb-4 animate-fade-in">
-                        Simple, Fast & Free Receipts
+                        Smart Free Receipt Maker for Small Businesses
                     </h1>
-                    <p class="text-md md:text-xl text-gray-600 mb-4">Works Without Internet</p>
+                    <p class="text-md md:text-xl text-gray-600 mb-4">Our smart free tool is the ultimate receipt generator for SMEs. Create professional receipts instantly with our free receipt maker online, designed for businesses in Ghana, Nigeria, and Kenya. Works without internet for reliable receipt maker for SMEs operations.</p>
                     <!-- Updated button alignment -->
                     <div class="flex justify-center md:justify-start">
                         <router-link to="/new-receipt"

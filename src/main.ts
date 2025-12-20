@@ -5,9 +5,10 @@ import App from './App.vue'
 import router from './router'
 import './style.css'
 import { FontAwesomeIcon } from './plugins/fontawesome.ts'
-import '@fortawesome/fontawesome-svg-core/styles.css' 
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import Toast, { toastOptions } from './plugins/toast.ts'
 import 'vue-toastification/dist/index.css'
+import { createHead } from '@vueuse/head'
 
 
 
@@ -22,6 +23,7 @@ import OfflineIndicator from './components/base/OfflineIndicator.vue'
 
 // Create Vue application
 const app = createApp(App)
+const head = createHead()
 
 // Configure Pinia with persistence
 const pinia = createPinia()
@@ -42,6 +44,7 @@ app.use(Toast, toastOptions)
 // Use plugins
 app.use(pinia)
 app.use(router)
+app.use(head)
 
 
 
