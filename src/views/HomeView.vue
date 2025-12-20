@@ -3,7 +3,7 @@
     <!-- Main Content -->
     <main class="w-full max-w-md mx-auto px-2 py-6 sm:max-w-lg sm:px-4 md:max-w-2xl lg:max-w-3xl">
       <!-- Hero Section -->
-    <HeroSection />
+      <HeroSection />
 
       <!-- How It Works Section -->
       <section class="mb-16">
@@ -64,15 +64,18 @@
         <div class="grid md:grid-cols-3 gap-8">
           <div class="text-center p-6 bg-white rounded-lg shadow-md">
             <h3 class="text-xl font-semibold mb-4">No Internet Required</h3>
-            <p class="text-gray-600">Our smart free tool works completely offline, perfect for areas with poor connectivity in Ghana, Nigeria, and Kenya.</p>
+            <p class="text-gray-600">Our smart free tool works completely offline, perfect for areas with poor
+              connectivity in Ghana, Nigeria, and Kenya.</p>
           </div>
           <div class="text-center p-6 bg-white rounded-lg shadow-md">
             <h3 class="text-xl font-semibold mb-4">Professional Receipts</h3>
-            <p class="text-gray-600">Generate high-quality receipts instantly with our free receipt maker online, trusted by thousands of SMEs.</p>
+            <p class="text-gray-600">Generate high-quality receipts instantly with our free receipt maker online,
+              trusted by thousands of SMEs.</p>
           </div>
           <div class="text-center p-6 bg-white rounded-lg shadow-md">
             <h3 class="text-xl font-semibold mb-4">Mobile Optimized</h3>
-            <p class="text-gray-600">Designed specifically for receipt maker for SMEs on mobile devices, with touch-friendly interfaces and fast performance.</p>
+            <p class="text-gray-600">Designed specifically for receipt maker for SMEs on mobile devices, with
+              touch-friendly interfaces and fast performance.</p>
           </div>
         </div>
       </section>
@@ -127,7 +130,7 @@ useHead({
         "@type": "WebApplication",
         "name": "Free Smart Receipt Maker for SMEs",
         "description": "Create receipts instantly with our smart, free receipt maker. Built for SMEs in Ghana, Nigeria, and Kenya.",
-        "url": "https://receiptmaker-ten.vercel.app/",
+        "url": "https://freeonlinereceipt.netlify.app/",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web Browser",
         "offers": {

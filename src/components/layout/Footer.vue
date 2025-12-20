@@ -76,7 +76,7 @@ import { useToast } from '@/composables/useToast'
 const toast = useToast()
 
 const shareMessage =
-  "Hey! I found this helpful free Receipt maker tool. Thought you might like it. https://receipt.stratonea.com/"
+  "Hey! I found this helpful free Receipt maker tool. Thought you might like it. https://freeonlinereceipt.netlify.app/"
 const whatsAppShareUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`
 
 
@@ -99,7 +99,8 @@ async function copyToClipboard(text: string) {
 }
 
 /* Hover effect for interactive elements */
-a:hover, button:hover {
+a:hover,
+button:hover {
   transform: translateY(-1px);
 }
 </style>
