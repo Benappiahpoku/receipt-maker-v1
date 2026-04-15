@@ -14,6 +14,7 @@ export const timeZoneToCountry: Record<string, CountryData> = {
     'Africa/Nairobi': { country: 'Kenya', currency: 'KES', currencySymbol: 'KSh' },
     'Africa/Johannesburg': { country: 'South Africa', currency: 'ZAR', currencySymbol: 'R' },
     'Africa/Abidjan': { country: 'Côte d\'Ivoire', currency: 'XOF', currencySymbol: 'CFA ' },
+    'Africa/Lusaka': { country: 'Zambia', currency: 'ZMK', currencySymbol: 'ZK' },
     'Asia/Kolkata': { country: 'India', currency: 'INR', currencySymbol: '₹' },
     'America/New_York': { country: 'United States', currency: 'USD', currencySymbol: '$' },
     'Europe/Paris': { country: 'France', currency: 'EUR', currencySymbol: '€' },

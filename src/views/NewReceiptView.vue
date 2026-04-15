@@ -293,6 +293,7 @@ const currencySymbol = computed(() => {
         NGN: '₦',
         KES: 'KSh',
         ZAR: 'R',
+        ZMK: 'ZK',
         XOF: 'CFA ',
         INR: '₹',
         USD: '$',
